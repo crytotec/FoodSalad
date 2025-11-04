@@ -1,6 +1,7 @@
 import kitchen from '../assets/image/Kitchen.jpeg'
 import { Chef } from '../Data/Items'
 import { useState } from 'react'
+import { Link } from "react-router-dom";
 
 function About() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
@@ -161,9 +162,11 @@ function About() {
 
         <div className="flex flex-col items-center justify-center gap-4 mt-10">
           <h3 className="text-xl md:text-2xl font-semibold text-gray-800">Hungry? Explore Our Menu!</h3>
+           <Link to='/contact'>
           <button className="bg-red-600 hover:bg-red-700 transition-all duration-300 px-8 py-3 text-white text-lg font-semibold rounded-full shadow-md hover:shadow-lg">
             Contact Us
           </button>
+          </Link>
         </div>
       </div>
     </div>
