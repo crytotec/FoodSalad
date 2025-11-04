@@ -44,7 +44,7 @@ function Navbar (){
          
            {/* <mobile> */}
          <div ref={MenuRef} className="relative z-10 sm:hidden flex justify-between ">
-            <h1>Logo</h1>
+            <h1 className="text-red-600 font-bold text-xl">Food Salad</h1>
             <button onClick={() =>setMenu(!menu)}>{menu ?<FaTimes/> :<FaBars/>}</button>
          {menu && (
             <ul className="absolute top-10  bg-red-600 w-full text-white p-4 flex flex-col items-center gap-10">
