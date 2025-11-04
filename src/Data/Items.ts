@@ -58,12 +58,12 @@ export const item = [
 ]
 
 export const customer = [
-  {Name:'Sarah Johnson', img:male1, Testimony:'Absolutely delicious! The meals were fresh, flavorful, and arrived right on time. I can’t wait to order again — everything tasted homemade.', Rate:'⭐ Rating: 5/5', location:'Lagos'},
-  {Name:'Daniel Okoro', img:female1, Testimony:'The burger was juicy, the fries were crispy, and the service was top-notch. This place never disappoints!', Rate:'⭐ Rating: 5/5', location:'Abuja'},
-  {Name:'Aisha Bello', img:male2, Testimony:'I love how everything tastes fresh and well-prepared. Their customer service is polite and quick — highly recommended!', Rate:'⭐ Rating: 5/5', location:'Ibadan'},
-  {Name:'Michael Adeyemi', img:female2, Testimony:'The flavor is always consistent, and the food presentation is on point. You can really tell they care about quality.', Rate:'⭐ Rating: 5/5', location:'Port Harcourt'},
-  {Name:'Chika Eze', img:male3, Testimony:'Their meals always make my day! The packaging is neat, and the taste is simply perfect. Keep up the great work.', Rate:'⭐ Rating: 5/5', location:'Enugu'},
-  {Name:'David Williams', img:female3, Testimony:'I’ve ordered several times, and it’s always a good experience. Great food, generous portions, and fast delivery!', Rate:'⭐ Rating: 5/5', location:'Benin City'},
+  {Name:'Daniel Okoro', img:male1, Testimony:'Absolutely delicious! The meals were fresh, flavorful, and arrived right on time. I can’t wait to order again — everything tasted homemade.', Rate:'⭐ Rating: 5/5', location:'Lagos'},
+  {Name:'Sarah Johnson', img:female1, Testimony:'The burger was juicy, the fries were crispy, and the service was top-notch. This place never disappoints!', Rate:'⭐ Rating: 5/5', location:'Abuja'},
+  {Name:'Michael Adeyemi', img:male2, Testimony:'I love how everything tastes fresh and well-prepared. Their customer service is polite and quick — highly recommended!', Rate:'⭐ Rating: 5/5', location:'Ibadan'},
+  {Name:'Aisha Bello', img:female2, Testimony:'The flavor is always consistent, and the food presentation is on point. You can really tell they care about quality.', Rate:'⭐ Rating: 5/5', location:'Port Harcourt'},
+  {Name:'David Williams', img:male3, Testimony:'Their meals always make my day! The packaging is neat, and the taste is simply perfect. Keep up the great work.', Rate:'⭐ Rating: 5/5', location:'Enugu'},
+  {Name:'Chika Eze', img:female3, Testimony:'I’ve ordered several times, and it’s always a good experience. Great food, generous portions, and fast delivery!', Rate:'⭐ Rating: 5/5', location:'Benin City'},
 ]
 
 export const Chef = [

@@ -1,93 +1,26 @@
 import { FaClock, FaFireAlt, FaGift } from "react-icons/fa";
 import { offers } from "../Data/Items";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect,useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { useEffect } from "react";
 import { signOut } from 'firebase/auth';
 import { Auth } from '../Firebase';
 
+function Offer() {
+  const navigate = useNavigate();
 
-function Offer() {   
-  
-  const [scrolling, setScrolling] = useState<boolean>(false);
-      const [menuOpen, setMenuOpen] = useState<boolean>(false);
-    
-  const location=useNavigate()
+  const HandleLogout = async () => {
+    try {
+      await signOut(Auth);
+      navigate('/');
+    } catch (error) {
+      console.error('Logout Failed', error);
+    }
+  };
 
-  const HandleLogout = async () =>{
-          try {
-            await signOut(Auth)
-            location('/')
-          } catch (error) {
-             console.error('Logout Failed', error)
-          }
-        }
-    useEffect(() => {
-        const handleScroll = () => setScrolling(window.scrollY > 50);
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-      }, []);
   return (
-    <div className="w-full">
-      <div
-                      className={`flex w-full items-center justify-between px-[10%] py-3 transition-all duration-300 
-                      ${scrolling ? "bg-red-700 shadow-lg" : "bg-red-600"}`}
-                    >
-                      {/* Logo */}
-                      <h1 className="text-white font-bold text-xl">Food Salad</h1>
-            
-                      {/* Desktop Menu */}
-                      <ul className="hidden md:flex gap-6 text-white font-medium">
-                        <Link to="/menu">
-                          <li className="hover:text-yellow-300 cursor-pointer">Menu</li>
-                        </Link>
-                        <Link to="/cart">
-                          <li className="hover:text-yellow-300 cursor-pointer">Cart</li>
-                        </Link>
-                        <Link to="/offer">
-                          <li className="hover:text-yellow-300 cursor-pointer">Offer</li>
-                        </Link>
-                      </ul>
-            
-                      {/* Desktop Logout */}
-                      <button onClick={HandleLogout} className="hidden md:block bg-red-400 p-2 font-bold text-white hover:bg-red-500 rounded-md">
-                        Logout
-                      </button>
-            
-                      {/* Mobile Menu Icon */}
-                      <div
-                        className="md:hidden text-white text-2xl cursor-pointer"
-                        onClick={() => setMenuOpen(!menuOpen)}
-                      >
-                        {menuOpen ? <FaTimes /> : <FaBars />}
-                      </div>
-            
-                      {/* Mobile Dropdown */}
-                      {menuOpen && (
-                        <div className="absolute top-[70px] left-0 w-full bg-red-700 flex flex-col items-center gap-6 py-6 text-white font-medium shadow-lg md:hidden">
-                          <Link to="/menu" onClick={() => setMenuOpen(false)}>
-                            <p className="hover:text-yellow-300 cursor-pointer">Menu</p>
-                          </Link>
-                          <Link to="/cart" onClick={() => setMenuOpen(false)}>
-                            <p className="hover:text-yellow-300 cursor-pointer">Cart</p>
-                          </Link>
-                          <Link to="/offer" onClick={() => setMenuOpen(false)}>
-                            <p className="hover:text-yellow-300 cursor-pointer">Offer</p>
-                          </Link>
-                          <button
-                            className="bg-red-400 px-4 py-2 font-bold text-white hover:bg-red-500 rounded-md"
-                            onClick={() =>{ setMenuOpen(false),HandleLogout()}}
-                          >
-                            Logout
-                          </button>
-                        </div>
-                      )}
-                    </div>
     <div className="w-full bg-gray-50 min-h-screen">
       {/* Hero Section */}
-      
       <section className="bg-gradient-to-r from-red-600 to-red-400 text-white py-16 text-center px-6">
-        
         <h1 className="text-4xl md:text-5xl font-bold mb-3">
           Today’s Special Offers
         </h1>
@@ -132,9 +65,9 @@ function Offer() {
                 </p>
               </div>
               <Link to={`/Offer/${offer.title.replace(/\s+/g, '')}`}>
-              <button className="mt-4 bg-red-600 text-white p-4 rounded-lg hover:bg-red-500 transition duration-300">
-                Order Now
-              </button>
+                <button className="mt-4 bg-red-600 text-white p-4 rounded-lg hover:bg-red-500 transition duration-300">
+                  Order Now
+                </button>
               </Link>
             </div>
           </div>
@@ -153,7 +86,6 @@ function Offer() {
           Join Now
         </button>
       </section>
-    </div>
     </div>
   );
 }

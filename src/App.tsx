@@ -54,10 +54,10 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact/>}/>
-            </Route>
-            <Route path="/menu" element={<Menu />} />
+              <Route path="/menu" element={<Menu />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/offer" element={<Offer />} />
+            </Route>
             <Route path="/sigin"  element={<Signin/>}/>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/offer/:title" element={<OfferDetails/>}/>

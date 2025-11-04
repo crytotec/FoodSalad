@@ -4,8 +4,7 @@ import { all, Burger, drinks, side, chickenCategory } from '../Data/Items';
 import { useDispatch } from 'react-redux';
 import { Appdispatch } from '../app/store';
 import { addMenu } from '../features/items/itemSlice';
-import { Link, useNavigate } from "react-router-dom";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import { signOut } from 'firebase/auth';
 import { Auth } from '../Firebase';
 
@@ -22,9 +21,7 @@ function Menu() {
   const [searchResult, setSearchResult] = useState<MenuDetails[] | null>(null);
   const [menu, setMenu] = useState(all);
   const [category, setCategory] = useState<string>('All');
-  const [scrolling, setScrolling] = useState<boolean>(false);
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const location=useNavigate()
+  const navigate = useNavigate();
   const cat = ['All', 'Burger', 'Drinks', 'Chicken', 'Side'];
   const dispatch = useDispatch<Appdispatch>();
 
@@ -73,84 +70,19 @@ function Menu() {
     setSearchResult(found.length > 0 ? found : []);
   };
 
-  // Scroll background change
-  useEffect(() => {
-    const handleScroll = () => setScrolling(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-
-  const HandleLogout = async () =>{
+  const HandleLogout = async () => {
     try {
-      await signOut(Auth)
-      location('/')
+      await signOut(Auth);
+      navigate('/');
     } catch (error) {
-       console.error('Logout Failed', error)
+      console.error('Logout Failed', error);
     }
-  }
+  };
+
   return (
     <div className="w-full min-h-screen">
-      {/* Navbar */}
-      <div className="fixed top-0 left-0 w-full flex justify-center z-50">
-        <div
-          className={`flex w-[90%] items-center justify-between px-[10%] py-3 transition-all duration-300 
-          ${scrolling ? "bg-red-700 shadow-lg" : "bg-red-600"}`}
-        >
-          {/* Logo */}
-          <h1 className="text-white font-bold text-xl">Food Salad</h1>
-
-          {/* Desktop Menu */}
-          <ul className="hidden md:flex gap-6 text-white font-medium">
-            <Link to="/menu">
-              <li className="hover:text-yellow-300 cursor-pointer">Menu</li>
-            </Link>
-            <Link to="/cart">
-              <li className="hover:text-yellow-300 cursor-pointer">Cart</li>
-            </Link>
-            <Link to="/offer">
-              <li className="hover:text-yellow-300 cursor-pointer">Offer</li>
-            </Link>
-          </ul>
-
-          {/* Desktop Logout */}
-          <button onClick={HandleLogout} className="hidden md:block bg-red-400 p-2 font-bold text-white hover:bg-red-500 rounded-md">
-            Logout
-          </button>
-
-          {/* Mobile Menu Icon */}
-          <div
-            className="md:hidden text-white text-2xl cursor-pointer"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? <FaTimes /> : <FaBars />}
-          </div>
-
-          {/* Mobile Dropdown */}
-          {menuOpen && (
-            <div className="absolute top-[70px] left-0 w-full bg-red-700 flex flex-col items-center gap-6 py-6 text-white font-medium shadow-lg md:hidden">
-              <Link to="/menu" onClick={() => setMenuOpen(false)}>
-                <p className="hover:text-yellow-300 cursor-pointer">Menu</p>
-              </Link>
-              <Link to="/cart" onClick={() => setMenuOpen(false)}>
-                <p className="hover:text-yellow-300 cursor-pointer">Cart</p>
-              </Link>
-              <Link to="/offer" onClick={() => setMenuOpen(false)}>
-                <p className="hover:text-yellow-300 cursor-pointer">Offer</p>
-              </Link>
-              <button
-                className="bg-red-400 px-4 py-2 font-bold text-white hover:bg-red-500 rounded-md"
-                onClick={() =>{ setMenuOpen(false), HandleLogout()}}
-              >
-                Logout
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-
       {/* Hero Section */}
-      <div className="relative w-full h-[300px] md:h-[500px] overflow-hidden mt-[80px]">
+      <div className="relative w-full h-[300px] md:h-[500px] overflow-hidden">
         <img
           src={chicken1}
           alt="Kitchen background"
@@ -164,8 +96,11 @@ function Menu() {
             From juicy burgers to tasty sides — explore our handcrafted meals
             made fresh every day.
           </p>
-          <button className="mt-6 px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-full transition duration-300 shadow-md">
-            Order Now
+          <button
+            onClick={HandleLogout}
+            className="mt-6 px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-full transition duration-300 shadow-md"
+          >
+            Logout
           </button>
         </div>
       </div>

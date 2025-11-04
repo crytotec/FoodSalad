@@ -3,10 +3,12 @@ import chicken from '../assets/image/chicken1.jpeg'
 import { item, customer } from '../Data/Items'
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa'
 import { FaArrowRight } from 'react-icons/fa6'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Appdispatch, RootState } from '../app/store'
 import { addMenu } from '../features/items/itemSlice'
+import { onAuthStateChanged } from 'firebase/auth'
+import { Auth } from '../Firebase'
 
 
 export interface forms{
@@ -46,6 +48,8 @@ function Home() {
     return visible
   }
 
+  
+
 
   const updateFormInput = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>{
      const {name, value}=e.target
@@ -64,15 +68,33 @@ function Home() {
       alert('fiil the form')
     }
   }
+
+const location=useNavigate();
+const [user, setUser]=useState<any>(null)
+
+useEffect(()=>{
+  const Unsubscribe=onAuthStateChanged(Auth, (currentUser)=>{
+    setUser(currentUser)
+  })
+
+  return () => Unsubscribe()
+},[])
+
+
+const HandleUser = () =>{
+  if(user){
+    location('/menu')
+  }else{
+    location('/signup')
+  }
+}
   return(
     <div className='w-full p-4 '>
       <div className='w-[80%] flex flex-col md:flex-row gap-10 justify-between mx-auto items-center'>
-        <div className='flex  flex-col gap-5'>
+        <div className='flex mt-10 md:mt-0 flex-col gap-5'>
         <h1>Delicious Starts Here</h1>
         <h3>Good food, good mood, every single time.</h3>
-        <Link to='/Menu'>
-        <button className='p-4 bg-red-600 text-white text-2xl hover:bg-red-300 duration-400'>Let’s Eat!</button>
-         </Link>
+        <button onClick={HandleUser} className='p-4 bg-red-600 text-white text-2xl hover:bg-red-300 duration-400'>Let’s Eat!</button>
         </div>
        <img src={chicken} className='object-cover w-[400px] h-[200px] md:h-[400px] rounded-2xl'/>
     </div>
@@ -87,7 +109,7 @@ function Home() {
       <button className='p-4 bg-red-600 text-white text-2xl hover:bg-red-300 duration-400'>Learn More </button>
       </Link>
     </div>
-    <div className="relative w-[90%] lg:w-[60%] mx-auto mt-10">
+    <div className="relative w-[90%] z-10 lg:w-[60%] mx-auto mt-10">
   {/* Arrows */}
   <FaArrowAltCircleLeft
     onClick={prevSlide}
