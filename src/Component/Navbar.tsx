@@ -25,7 +25,7 @@ function Navbar (){
   return(
     <div className="w-full p-4">
         <div className="hidden md:flex   items-center justify-between w-[80%] mx-auto p-4">
-        <h1 className="font-bold text-gray-600">Logo</h1>
+        <h1 className="text-red-600 font-bold text-xl">Food Salad</h1>
          <ul className="flex text-gray-600 font-bold items-center gap-10">
           <Link to='/'>
             <li className="cursor-pointer hover:text-red-400 duration-500">Home</li>
